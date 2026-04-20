@@ -1,0 +1,14 @@
+D:\Learning\Course\CSharp_Projects\P1_StudentManagementSystem\bin\Debug\net10.0\P1_StudentManagementSystem.exe
+D:\Learning\Course\CSharp_Projects\P1_StudentManagementSystem\bin\Debug\net10.0\P1_StudentManagementSystem.deps.json
+D:\Learning\Course\CSharp_Projects\P1_StudentManagementSystem\bin\Debug\net10.0\P1_StudentManagementSystem.runtimeconfig.json
+D:\Learning\Course\CSharp_Projects\P1_StudentManagementSystem\bin\Debug\net10.0\P1_StudentManagementSystem.dll
+D:\Learning\Course\CSharp_Projects\P1_StudentManagementSystem\bin\Debug\net10.0\P1_StudentManagementSystem.pdb
+D:\Learning\Course\CSharp_Projects\P1_StudentManagementSystem\obj\Debug\net10.0\P1_StudentManagementSystem.GeneratedMSBuildEditorConfig.editorconfig
+D:\Learning\Course\CSharp_Projects\P1_StudentManagementSystem\obj\Debug\net10.0\P1_StudentManagementSystem.AssemblyInfoInputs.cache
+D:\Learning\Course\CSharp_Projects\P1_StudentManagementSystem\obj\Debug\net10.0\P1_StudentManagementSystem.AssemblyInfo.cs
+D:\Learning\Course\CSharp_Projects\P1_StudentManagementSystem\obj\Debug\net10.0\P1_StudentManagementSystem.csproj.CoreCompileInputs.cache
+D:\Learning\Course\CSharp_Projects\P1_StudentManagementSystem\obj\Debug\net10.0\P1_StudentManagementSystem.dll
+D:\Learning\Course\CSharp_Projects\P1_StudentManagementSystem\obj\Debug\net10.0\refint\P1_StudentManagementSystem.dll
+D:\Learning\Course\CSharp_Projects\P1_StudentManagementSystem\obj\Debug\net10.0\P1_StudentManagementSystem.pdb
+D:\Learning\Course\CSharp_Projects\P1_StudentManagementSystem\obj\Debug\net10.0\P1_StudentManagementSystem.genruntimeconfig.cache
+D:\Learning\Course\CSharp_Projects\P1_StudentManagementSystem\obj\Debug\net10.0\ref\P1_StudentManagementSystem.dll
