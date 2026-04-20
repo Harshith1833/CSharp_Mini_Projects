@@ -1,0 +1,15 @@
+D:\Learning\Course\CSharp_Projects\C-_Mini_Projects\P2_SimpleCalculator\obj\Debug\net10.0\P2_SimpleCalculator.GeneratedMSBuildEditorConfig.editorconfig
+D:\Learning\Course\CSharp_Projects\C-_Mini_Projects\P2_SimpleCalculator\obj\Debug\net10.0\P2_SimpleCalculator.AssemblyInfoInputs.cache
+D:\Learning\Course\CSharp_Projects\C-_Mini_Projects\P2_SimpleCalculator\obj\Debug\net10.0\P2_SimpleCalculator.AssemblyInfo.cs
+D:\Learning\Course\CSharp_Projects\C-_Mini_Projects\P2_SimpleCalculator\obj\Debug\net10.0\P2_SimpleCalculator.csproj.CoreCompileInputs.cache
+D:\Learning\Course\CSharp_Projects\C-_Mini_Projects\P2_SimpleCalculator\obj\Debug\net10.0\P2_SimpleCalculator.sourcelink.json
+D:\Learning\Course\CSharp_Projects\C-_Mini_Projects\P2_SimpleCalculator\bin\Debug\net10.0\P2_SimpleCalculator.exe
+D:\Learning\Course\CSharp_Projects\C-_Mini_Projects\P2_SimpleCalculator\bin\Debug\net10.0\P2_SimpleCalculator.deps.json
+D:\Learning\Course\CSharp_Projects\C-_Mini_Projects\P2_SimpleCalculator\bin\Debug\net10.0\P2_SimpleCalculator.runtimeconfig.json
+D:\Learning\Course\CSharp_Projects\C-_Mini_Projects\P2_SimpleCalculator\bin\Debug\net10.0\P2_SimpleCalculator.dll
+D:\Learning\Course\CSharp_Projects\C-_Mini_Projects\P2_SimpleCalculator\bin\Debug\net10.0\P2_SimpleCalculator.pdb
+D:\Learning\Course\CSharp_Projects\C-_Mini_Projects\P2_SimpleCalculator\obj\Debug\net10.0\P2_SimpleCalculator.dll
+D:\Learning\Course\CSharp_Projects\C-_Mini_Projects\P2_SimpleCalculator\obj\Debug\net10.0\refint\P2_SimpleCalculator.dll
+D:\Learning\Course\CSharp_Projects\C-_Mini_Projects\P2_SimpleCalculator\obj\Debug\net10.0\P2_SimpleCalculator.pdb
+D:\Learning\Course\CSharp_Projects\C-_Mini_Projects\P2_SimpleCalculator\obj\Debug\net10.0\P2_SimpleCalculator.genruntimeconfig.cache
+D:\Learning\Course\CSharp_Projects\C-_Mini_Projects\P2_SimpleCalculator\obj\Debug\net10.0\ref\P2_SimpleCalculator.dll
