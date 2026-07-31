@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Management</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --danger: #dc2626;
+      --border: #e2e8f0;
+      --shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+      --success: #0f766e;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #eff6ff 0%, var(--bg) 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 36px 20px 60px;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .hero h1 { margin: 0 0 8px; font-size: 2rem; font-weight: 700; }
+    .hero p { margin: 0; color: var(--muted); font-size: 1rem; }
+
+    .badge {
+      background: rgba(37, 99, 235, 0.1);
+      color: var(--primary);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .auth-shell, .dashboard-shell { display: none; }
+    .visible { display: block; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .card h2 { margin-top: 0; margin-bottom: 16px; font-size: 1.15rem; }
+
+    form { display: grid; gap: 12px; }
+
+    input, button, select {
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    input:focus, select:focus { outline: 2px solid rgba(37, 99, 235, 0.2); border-color: var(--primary); }
+
+    button {
+      background: var(--primary);
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+
+    button:hover { background: var(--primary-dark); }
+
+    .secondary { background: #e2e8f0; color: #0f172a; border: none; }
+    .secondary:hover { background: #cbd5e1; }
+    .danger { background: var(--danger); }
+    .danger:hover { background: #b91c1c; }
+    .success { background: var(--success); }
+    .success:hover { background: #115e59; }
+
+    .switch-link { margin-top: 12px; color: var(--primary); cursor: pointer; font-weight: 600; }
+    .message { margin-bottom: 12px; padding: 10px 12px; border-radius: 8px; background: #eff6ff; color: #1d4ed8; }
+    .message.error { background: #fef2f2; color: #b91c1c; }
+    .message.success { background: #ecfdf5; color: #047857; }
+
+    .grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 24px; }
+    ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+    li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; background: #fbfdff; }
+    .student-info strong { display:block; margin-bottom:4px; }
+    .student-info span { display:block; color:var(--muted); font-size:0.95rem; margin-top:2px; }
+    .teacher-tag {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .actions { display:flex; gap:8px; flex-wrap:wrap; }
+    .muted { color: var(--muted); text-align:center; padding:24px 0; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom: 16px; }
+
+    @media (max-width: 780px) {
+      .auth-grid, .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <div>
+        <h1>Student Management</h1>
+        <p>Secure access for teachers and admins to manage student records.</p>
+      </div>
+      <div class="badge">Teacher • Admin • SQLite</div>
+    </div>
+
+    <div id="authView" class="auth-shell visible">
+      <div class="card" style="max-width: 480px; margin: 0 auto;">
+        <h2 id="authTitle">Sign Up</h2>
+        <div id="authMessage"></div>
+        <form id="authForm">
+          <input id="authUsername" placeholder="Username" required />
+          <input id="authPassword" type="password" placeholder="Password" required />
+          <select id="authRole">
+            <option value="Teacher">Teacher / Professor</option>
+            <option value="Admin">Admin / CEO</option>
+          </select>
+          <button type="submit">Create Account</button>
+        </form>
+        <div class="switch-link" onclick="toggleMode()">Already have an account? Login</div>
+      </div>
+    </div>
+
+    <div id="dashboardView" class="dashboard-shell">
+      <div class="topbar">
+        <div>
+          <h2 id="welcomeText" style="margin:0;">Welcome</h2>
+          <p id="roleText" style="margin:4px 0 0; color:var(--muted)"></p>
+          <div id="roleBadge" style="margin-top: 8px; display: inline-block; padding: 6px 10px; border-radius: 999px; background: rgba(37,99,235,0.12); color: var(--primary); font-weight: 700; font-size: 0.9rem;"></div>
+        </div>
+        <button class="secondary" onclick="logout()">Logout</button>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h2 id="formTitle">Add Student</h2>
+          <form id="studentForm">
+            <input id="studentId" type="hidden" />
+            <input id="name" placeholder="Full Name" required />
+            <input id="email" placeholder="Email Address" required />
+            <input id="age" type="number" placeholder="Age" required />
+            <button type="submit">Save Student</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2>Student List</h2>
+          <div id="studentList">Loading...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const authView = document.getElementById('authView');
+    const dashboardView = document.getElementById('dashboardView');
+    const authForm = document.getElementById('authForm');
+    const authTitle = document.getElementById('authTitle');
+    const authMessage = document.getElementById('authMessage');
+    const authUsername = document.getElementById('authUsername');
+    const authPassword = document.getElementById('authPassword');
+    const authRole = document.getElementById('authRole');
+    const welcomeText = document.getElementById('welcomeText');
+    const roleText = document.getElementById('roleText');
+    const roleBadge = document.getElementById('roleBadge');
+    const apiUrl = 'http://localhost:5198';
+    const studentsUrl = `${apiUrl}/students`;
+
+    let currentUser = null;
+    let isLoginMode = false;
+
+    function showMessage(text, type = 'success') {
+      authMessage.className = `message ${type}`;
+      authMessage.textContent = text;
+    }
+
+    function toggleMode() {
+      isLoginMode = !isLoginMode;
+      authTitle.textContent = isLoginMode ? 'Login' : 'Sign Up';
+      authForm.querySelector('button').textContent = isLoginMode ? 'Login' : 'Create Account';
+      document.getElementById('authRole').style.display = isLoginMode ? 'none' : 'block';
+      showMessage('');
+      authForm.reset();
+    }
+
+    function showDashboard(user) {
+      currentUser = user;
+      authView.classList.remove('visible');
+      dashboardView.classList.add('visible');
+      welcomeText.textContent = `Welcome, ${user.username}`;
+      roleText.textContent = `${user.role} access`;
+      roleBadge.textContent = user.role === 'Admin' ? 'Admin / CEO' : 'Teacher / Professor';
+      document.getElementById('formTitle').textContent = user.role === 'Admin' ? 'Student Overview' : 'Add Student';
+      loadStudents();
+    }
+
+    function logout() {
+      currentUser = null;
+      dashboardView.classList.remove('visible');
+      authView.classList.add('visible');
+      authForm.reset();
+      showMessage('You have been logged out.', 'success');
+      document.getElementById('studentList').innerHTML = '';
+    }
+
+    authForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (!isLoginMode) {
+        const payload = {
+          username: authUsername.value,
+          password: authPassword.value,
+          role: authRole.value,
+          accessCode: authCode.value || null
+        };
+
+        const response = await fetch(`${apiUrl}/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (response.ok) {
+          showMessage('Account created successfully. Please login.', 'success');
+          authForm.reset();
+          isLoginMode = true;
+          authTitle.textContent = 'Login';
+          authForm.querySelector('button').textContent = 'Login';
+          document.getElementById('authRole').style.display = 'none';
+        } else {
+          showMessage(result.message || 'Sign up failed.', 'error');
+        }
+        return;
+      }
+
+      const payload = {
+        username: authUsername.value,
+        password: authPassword.value
+      };
+
+      const response = await fetch(`${apiUrl}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (response.ok) {
+        showDashboard({ username: result.username, role: result.role });
+      } else {
+        showMessage(result.message || 'Login failed.', 'error');
+      }
+    });
+
+    const form = document.getElementById('studentForm');
+    const studentList = document.getElementById('studentList');
+    const formTitle = document.getElementById('formTitle');
+    const idInput = document.getElementById('studentId');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const ageInput = document.getElementById('age');
+
+    async function loadStudents() {
+      studentList.innerHTML = 'Loading...';
+      try {
+        const response = await fetch(studentsUrl);
+        const students = await response.json();
+        if (!students.length) {
+          studentList.innerHTML = '<p class="muted">No students found.</p>';
+          return;
+        }
+
+        studentList.innerHTML = `
+          <ul>
+            ${students.map(student => `
+              <li>
+                <div class="student-info">
+                  <strong>${student.name}</strong>
+                  <span>${student.email}</span>
+                  <span>Age: ${student.age}</span>
+                  ${student.name.includes('(') && student.name.includes(')') ? '<span class="teacher-tag">Teacher added</span>' : ''}
+                </div>
+                <div class="actions">
+                  ${currentUser?.role === 'Admin' ? `<button class="secondary" onclick="editStudent(${student.id})">Edit</button><button class="danger" onclick="deleteStudent(${student.id})">Delete</button>` : `<button class="secondary" onclick="editStudent(${student.id})">Edit</button>`}
+                </div>
+              </li>
+            `).join('')}
+          </ul>
+        `;
+      } catch (error) {
+        studentList.innerHTML = '<p class="muted">Unable to load students.</p>';
+        console.error(error);
+      }
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!currentUser) return;
+
+      const payload = { name: `${nameInput.value} (${currentUser.username})`, email: emailInput.value, age: Number(ageInput.value) };
+      const id = idInput.value;
+      const method = id ? 'PUT' : 'POST';
+      const url = id ? `${studentsUrl}/${id}` : studentsUrl;
+      if (id) payload.id = Number(id);
+
+      const response = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      if (response.ok) {
+        form.reset();
+        idInput.value = '';
+        formTitle.textContent = 'Add Student';
+        loadStudents();
+      }
+    });
+
+    window.editStudent = async (id) => {
+      const response = await fetch(`${studentsUrl}/${id}`);
+      const student = await response.json();
+      idInput.value = student.id;
+      nameInput.value = student.name;
+      emailInput.value = student.email;
+      ageInput.value = student.age;
+      formTitle.textContent = 'Edit Student';
+    };
+
+    window.deleteStudent = async (id) => {
+      const response = await fetch(`${studentsUrl}/${id}`, { method: 'DELETE' });
+      if (response.ok) {
+        loadStudents();
+      }
+    };
+  </script>
+</body>
+</html>

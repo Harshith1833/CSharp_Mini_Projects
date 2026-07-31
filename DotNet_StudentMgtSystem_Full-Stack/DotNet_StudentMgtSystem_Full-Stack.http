@@ -1,0 +1,6 @@
+@DotNet_StudentMgtSystem_Full_Stack_HostAddress = http://localhost:5198
+
+GET {{DotNet_StudentMgtSystem_Full_Stack_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
